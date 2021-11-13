@@ -24,7 +24,6 @@ def create():
         Degree=str(input("Enter the graduation of the student: "))
         Branch=str(input("Enter the branch of the student: "))
         GPA=float(input("Enter the SGPA of the student: "))
-        ins = students.insert()
         ins = students.insert().values(id= Id, name = Name, sem = Sem, degree= Degree, branch= Branch, gpa= GPA )
         result = conn.execute(ins)
 
