@@ -10,9 +10,9 @@ students = Table(
    Column('gender', String(1)),
    Column('entry_type', String(10)),
    Column('YOA', Integer),
-   Column('migrated', Boolean),
+   Column('migrated', String(1)),
    Column('Details_of_transfer', String(100)),
-   Column('admission_in_separate_division', Boolean),
+   Column('admission_in_separate_division', String(1)),
    Column('Details_of_admission_in_seperate_division', String(100)),
    Column('YOP', Integer),
    Column('degree_type', String(2)),
@@ -34,16 +34,16 @@ def create():
         entry_type=str(input("Enter the entry type (normal/lateral) of the student: "))
         YOA=int(input("Enter the year of admission of the student: "))
         migrated=(input("Has the student migrated to other programs / Institutions - Yes / No: "))
-        if migrated=="Yes":
-           migrated== 1
-           Details_of_transfer= str(input("Enter the details of transfer of the student: "))
-        else:
+        if migrated=="yes":
+            migrated== 1
+            Details_of_transfer= str(input("Enter the details of transfer of the student: "))
+        elif migrated=="no":
             migrated== 0
             Details_of_transfer= None
         admission_in_separate_division=(input("Does the student have admission in a seperate division - Yes (With details) / No: "))
-        if admission_in_separate_division=="Yes":
-           admission_in_separate_division==True
-           Details_of_admission_in_seperate_division= str(input("Enter the details of admission in seperate division of the student: "))
+        if admission_in_separate_division=="yes":
+            admission_in_separate_division==True
+            Details_of_admission_in_seperate_division= str(input("Enter the details of admission in seperate division of the student: "))
         else:
             admission_in_separate_division==False
             Details_of_admission_in_seperate_division= None
@@ -70,8 +70,8 @@ def update():
     conn.execute(s).fetchall()
         
 def delete():
-    x=input("Enter the id of the student whose record has to deleted: ")
-    stmt = students.delete().where(students.c.id == x)
+    x=input("Enter the USN of the student whose record has to deleted: ")
+    stmt = students.delete().where(students.c.USN == x)
     conn.execute(stmt)
     s = students.select()
     conn.execute(s).fetchall()
